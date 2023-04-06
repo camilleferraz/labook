@@ -151,8 +151,8 @@ public editPost =async (input:EditInputDTO) => {
 
     const NewPostToEdit = new Posts(
         id,
-        content,
         postToEdit.creator_id,
+        content,
         postToEdit.likes,
         postToEdit.dislikes,
         postToEdit.created_at,
@@ -166,6 +166,7 @@ public editPost =async (input:EditInputDTO) => {
         message:"Atualização feita com sucesso.",
         post: NewPostToEdit
     }
+    return output
 }
 
 public deletePost =async (input:DeleteInputPostsDTO) => {
