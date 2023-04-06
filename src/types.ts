@@ -5,7 +5,7 @@ export enum USER_ROLES {
 
 export interface TokenPayload {
     id: string,
-		name: string,
+	name: string,
     role: USER_ROLES
 }
 
@@ -27,16 +27,38 @@ export interface UserModel {
     createdAt: string
 }
 
-export interface ProductDB {
+export interface PostsDB {
     id: string,
-    name: string,
-    price: number,
-    created_at: string
+    creator_id:string,
+    content:string,
+    likes:number,
+    dislikes:number,
+    created_at:string,
+    updated_at:string
 }
 
-export interface ProductModel {
+export interface PostsModel {
     id: string,
-    name: string,
-    price: number,
-    createdAt: string
+    creatorId:string,
+    content:string,
+    likes:number,
+    dislikes:number,
+    createdAt:string,
+    updatedAt:string
+}
+
+export interface PostsByUserDB {
+    id: string,
+    content: string,
+    likes:number,
+    dislikes:number,
+    created_at:string,
+    updated_at:string,
+    creator_id:string
+}
+
+export interface LikesDislikesDB{
+    user_id:string,
+    post_id:string,
+    like:number
 }
