@@ -46,7 +46,7 @@ export class PostsController{
             token: req.headers.authorization
         }
 
-        const output = await this.postsBusiness.createNewPost
+        const output = await this.postsBusiness.createNewPost(input)
 
         res.status(201).send(output)
 
@@ -73,7 +73,7 @@ export class PostsController{
                  token: req.headers.authorization
              }
 
-         const output = await this.postsBusiness.editPost
+         const output = await this.postsBusiness.editPost(input)
 
          res.status(201).send(output)
 
@@ -99,7 +99,7 @@ export class PostsController{
                  id: req.params.id,
                  token: req.headers.authorization
              }
-             const output = await this.postsBusiness.deletePost
+             const output = await this.postsBusiness.deletePost(input)
              res.status(201).send(output)
             
          } catch (error) {
@@ -126,7 +126,7 @@ export class PostsController{
                 token: req.headers.authorization
             }
 
-            const output = await this.postsBusiness.likeDislike
+            const output = await this.postsBusiness.likeDislike(input)
             res.status(201).send(output)
         } catch (error) {
             console.log(error)

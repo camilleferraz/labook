@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { UserBusiness } from "../business/UsersBusiness"
+import { LoginInput, SignupInput } from "../dtos/usersDTO"
 
 export class UsersControler {
     constructor(
@@ -32,20 +33,21 @@ public getAllUsers = async (req:Request, res: Response) =>{
     }
 }
 
-public signup = async (req:Request, res: Response) =>{
+public signup = async (req: Request, res: Response) => {
     try {
-        const input ={
-            q:req.query.q,
-            token:req.headers.authorization
+        const input: SignupInput = {
+            // id: req.body.id,
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
         }
+        
+        const output = await this.usersBusiness.signup(input)
 
-        const output = await this.usersBusiness.getAllUsers(input)
-
-        res.status(200).send(output)
-
+        res.status(201).send(output)
     } catch (error) {
         console.log(error)
-    
+
         if (req.statusCode === 200) {
             res.status(500)
         }
@@ -54,24 +56,23 @@ public signup = async (req:Request, res: Response) =>{
             res.send(error.message)
         } else {
             res.send("Erro inesperado")
-        } 
+        }
     }
 }
 
-public login = async (req:Request, res: Response) =>{
+public login = async (req: Request, res: Response) => {
     try {
-        const input ={
-            q:req.query.q,
-            token:req.headers.authorization
+        const input: LoginInput = {
+            email: req.body.email,
+            password: req.body.password
         }
 
-        const output = await this.usersBusiness.getAllUsers(input)
+        const output = await this.usersBusiness.login(input)
 
         res.status(200).send(output)
-
     } catch (error) {
         console.log(error)
-    
+
         if (req.statusCode === 200) {
             res.status(500)
         }
@@ -80,8 +81,7 @@ public login = async (req:Request, res: Response) =>{
             res.send(error.message)
         } else {
             res.send("Erro inesperado")
-        } 
+        }
     }
 }
-
 }
